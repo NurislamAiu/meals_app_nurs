@@ -5,15 +5,21 @@ import 'package:meals_app_nurs/widgets/meal_item.dart';
 import '../models/meal.dart';
 
 class MealsScreen extends StatelessWidget {
-  const MealsScreen({super.key, this.title, required this.meals});
+  const MealsScreen(
+      {super.key, this.title, required this.meals, required this.onToggleFavorite});
 
   final String? title;
   final List<Meal> meals;
+  final void Function(Meal meal) onToggleFavorite;
 
   void selectMeal(BuildContext context, Meal meal) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (ctx) => MealDetailsScreen(meal: meal)),
+      MaterialPageRoute(
+        builder:
+            (ctx) =>
+            MealDetailsScreen(meal: meal, onToggleFavorite: onToggleFavorite),
+      ),
     );
   }
 
@@ -25,15 +31,29 @@ class MealsScreen extends StatelessWidget {
         children: [
           Text(
             'Uh oh ... nothing here!',
-            style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-              color: Theme.of(context).colorScheme.onBackground,
+            style: Theme
+                .of(context)
+                .textTheme
+                .headlineLarge!
+                .copyWith(
+              color: Theme
+                  .of(context)
+                  .colorScheme
+                  .onBackground,
             ),
           ),
           SizedBox(height: 16),
           Text(
             'Try selecting a different category!',
-            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-              color: Theme.of(context).colorScheme.onBackground,
+            style: Theme
+                .of(context)
+                .textTheme
+                .bodyLarge!
+                .copyWith(
+              color: Theme
+                  .of(context)
+                  .colorScheme
+                  .onBackground,
             ),
           ),
         ],
@@ -43,7 +63,8 @@ class MealsScreen extends StatelessWidget {
       content = ListView.builder(
         itemCount: meals.length,
         itemBuilder:
-            (ctx, index) => MealItem(
+            (ctx, index) =>
+            MealItem(
               meal: meals[index],
               onSelectMeal: (context, meal) {
                 selectMeal(context, meal);
