@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:meals_app_nurs/providers/favorites_provider.dart';
-import 'package:meals_app_nurs/providers/meals_provider.dart';
 import 'package:meals_app_nurs/screens/categories.dart';
 import 'package:meals_app_nurs/screens/filters.dart';
 import 'package:meals_app_nurs/screens/meals.dart';
@@ -44,8 +43,6 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final meals = ref.watch(mealsProvider);
-    final activeFilters = ref.watch(filtersProvider);
     final availableMeals = ref.watch(filteredMealsProvider);
 
     Widget activePage = CategoriesScreen(availableMeals: availableMeals);
